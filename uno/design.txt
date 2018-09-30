@@ -1,0 +1,49 @@
+A fully-functional game of UNO, playable at the command line.
+
+Edge cases considered: 
+
+-   multiplayer vs. single player with computers
+    -   computers will play a random valid card every turn, since there  
+        wasn't time to train them to simulate a player.
+
+-   is_valid() and is_game_won() functions
+    -   need to make a sure a move was valid and to know if someone won the game.
+    -   for simplicity: only allow players to make valid moves, pre-selecting which 
+        cards are valid for any given turn.
+
+-   the likelihood of being dealt a certain card needs to be true to the game's deck.
+
+-   need to keep track of the top card on the discard pile. 
+
+Still needs some work:
+-   how the game is displayed in the terminal.
+-   much more smooth transition between players.
+-   deck logic, shuffle logic, turn logic
+-   UNO! message if a player is down to 1 card.
+-   option to draw a card from the pile.
+
+Design choices:
+
+    Card: yellow, red, green, blue, number, skip, +4, +2, reverse, 4-color
+    =========
+    |yellow |
+    |6      |
+    =========
+    =========
+    |choose |    -> Player chooses color. Top card on discard pile  
+    |plus4  |       becomes the color of the card. NOT the wild card.
+    =========
+
+
+
+CASES:
+
+if there is no valid card:
+draw a card, DO NOT append. Play that card if it's valid.
+Append otherwise. skip effect logic just finish
+
+if there is no valid card and the plus_cards > 0:
+    draw a card, play if it's valid, 
+    if not: append to deck and append cards to the deck 
+    
+
