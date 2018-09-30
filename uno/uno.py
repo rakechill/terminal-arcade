@@ -238,7 +238,6 @@ def play_game():
         game.take_turn()
 
 play_game()
-
     
 again = input("Wanna play again? y/n ")
 os.system('cls' if os.name == 'nt' else 'clear')
