@@ -76,7 +76,7 @@ class Game:
         self.discarded = []
 
     def deal_cards(self):
-        for card in range(7):
+        for card in range(2):
             for player in self.players:
                 player.cards.append(self.deck.draw())
 
@@ -206,21 +206,27 @@ def deck():
 
     return my_deck
 
+def play_again():    
+    again = input("Wanna play again? y/n ")
+    os.system('cls' if os.name == 'nt' else 'clear')
+    if again == "y":
+        play_game()
+    return
 
 """<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>"""
 def play_game():
     os.system('cls' if os.name == 'nt' else 'clear')
     print("\nWelcome to the game of UNO!\n")
 
-    option = input("\nType ONE to play against 3 computers\nor TWO to play with 2-4 people. ")
-    while option != "ONE" and option != "TWO":
+    option = input("\nType ONE to play against 3 computers,\nTWO to play with 2-4 people,\nor THREE to watch 4 computers play. ")
+    while option != "ONE" and option != "TWO" and option != "THREE":
         option = input("\nType ONE to play against 3 computers\nor TWO to play with 2-4 people. ")
 
     if option == "ONE":
         name = input("\nWhat's your name, Player 1? ")
         game = Game([Player(name, False), Player("computer1", True), Player("computer2", True), Player("computer3", True)], deck())
         
-    if option == "TWO":
+    elif option == "TWO":
         num_players = int(input("\nHow many people (including you) will be playing? ").strip())
         count = 0
         players = []
@@ -235,6 +241,12 @@ def play_game():
             comp_count += 1
         game = Game(players, deck())
 
+    else:
+        players = []
+        for i in range(4):
+            players.append(Player("computer" + str(i+1), True))
+        game = Game(players, deck())
+
     while not game.uno_or_over():
         os.system('cls' if os.name == 'nt' else 'clear')
         print("\n")
@@ -244,10 +256,8 @@ def play_game():
         else:
             input("It's your turn, " + game.players[0].name + ". Press any key to start. ")
         game.take_turn()
+    
+    play_again()
 
 play_game()
-    
-again = input("Wanna play again? y/n ")
-os.system('cls' if os.name == 'nt' else 'clear')
-if again == "y":
-    play_game()
+
