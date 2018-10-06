@@ -76,7 +76,7 @@ class Game:
         self.discarded = []
 
     def deal_cards(self):
-        for card in range(2):
+        for card in range(7):
             for player in self.players:
                 player.cards.append(self.deck.draw())
 
